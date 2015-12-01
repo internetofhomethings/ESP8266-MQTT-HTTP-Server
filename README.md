@@ -2,7 +2,7 @@
 
 This project provides a Web Server Framework using either the Arduino Wifi Library or the EspressIf SDK API.
 
-Setup:
+<strong>Setup:</strong>
 
 1. Copy the webandmqtt_server folder to your Arduino sketch folder.
 2. Copy the UtilityFunctions folder to your Arduino libraries folder.
@@ -35,7 +35,7 @@ While not necessary, the code assumes an LED is connected to GPIO16. This LED is
 power-up and is turned OFF once initialization completes.
 
 
-Web Server Performance Test:
+<strong>Web Server Performance Test:</strong>
 
 Open the html file "mqtt_server.html" in a web browser to test the Web Server.
 
@@ -66,13 +66,13 @@ For the "GetSensors" request, a JSON string will be returned with the sensor val
 
 The servers will also respond to requests to turn the LED, if connected, on and off.
 
-To turn on, enter the request:
+<strong>To turn on, enter the request:</strong>
 
 /?request=LedOn
 
 And click on one of the "Request via..." buttons.
 
-To turn off, enter the request:
+<strong>To turn off, enter the request:</strong>
 
 ?request=LedOff
 
