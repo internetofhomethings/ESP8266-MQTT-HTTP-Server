@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <title>MQTT JavaScript Client Example</title>
+	    <!-- Latest compiled and minified CSS - add here as needed -->
+	</head>
+	<body>
+	    <!-- HTML to display MQTT topic values -->
+		<div><strong>ESP8266 MQTT vs HTTP Servers</strong></div><br>
+		<div id="payloadmqqt"></div>
+		<br><br>
+		Request:<br>
+        <input id="request" type="text" name="request">
+		<button id="sendrequestmqtt" name="sendrequestmqtt">Request via MQTT</button>
+		<button id="sendrequesthttp" name="sendrequesthttp">Request via HTTP</button>
+		<br><br>
+		Sent Timestamp:<br>
+		<input id="txtime" type="text" name="txtime"><br>
+		Recv Timestamp:<br>
+		<input id="rxtime" type="text" name="rxtime"><br>
+		Lapse Time (ms):<br>
+		<input id="elapsetime" type="text" name="elapsetime"><br>
+
+
+		<!-- mosquitto MQTT -->
+		<script type="text/javascript" src="http://test.mosquitto.org/mosquitto.js"></script>
+
+		<!-- jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+		<!-- Custom MQTT client for this example -->
+		<script>
+			var tstart = Date.now();
+			var tend = Date.now();
+			var jsn = ""
+
+            //Set Default Request
+		    $("#request").val("/?request=GetSensors");
+
+			///////////////////////////////////////////////////////////
+			// Javascript for MQTT Server Communication
+			///////////////////////////////////////////////////////////
+			//Set Default MQTT Url
+			var mqtturl = "ws://test.mosquitto.org:8080/mqtt";
+
+			// Create MQTT client instance
+			client = new Mosquitto();
+			client.run = 0;
+
+            //executes once after window is loaded
+			function windowloaded() {
+				// Connect to MQTT broker
+				client.connect(mqtturl);
+			}
+			window.onload = windowloaded;
+
+			// Callback executed upon MQTT broker connection
+			client.onconnect = function(rc){
+				client.subscribe('MyMqttSvrRply', 0);
+			};
+
+			//Callback executed upon MQTT broker disconnection
+			client.ondisconnect = function(rc){
+				client.connect(mqtturl);
+			};
+
+			//Callback executed upon receipt of MQTT message
+			client.onmessage = function(topic, payload, qos){
+				if(topic=="MyMqttSvrRply") {
+				    setpayload(payload);
+				}
+			};
+
+            //Callback for "Request via MQTT" button click
+			$("#sendrequestmqtt").click(function() {
+			    $("#elapsetime").val("wait...");
+			    tstart = Date.now();
+			    $("#txtime").val(tstart);
+                client.publish("MyMqttSvrRqst",$("#request").val(),0,0);
+            });
+			///////////////////////////////////////////////////////////
+			// End of Javascript for MQTT Server Communication
+			///////////////////////////////////////////////////////////
+
+
+            //Callback for "Request via HTTP" button click
+			$("#sendrequesthttp").click(function() {
+			    $("#elapsetime").val("wait...");
+			    tstart = Date.now();
+			    $("#txtime").val(tstart);
+			    $.get("http://192.168.0.132:9701" + $("#request").val(), function(data, status) {
+			        if($("#request").val()=="/?request=GetSensors") {
+						jsn = '{\r\n"Ain0":' + '"' + data.Ain0 + '",\r\n';
+						jsn += '"Ain1":' + '"' + data.Ain1 + '",\r\n';
+						jsn += '"Ain2":' + '"' + data.Ain2 + '",\r\n';
+						jsn += '"Ain3":' + '"' + data.Ain3 + '",\r\n';
+						jsn += '"Ain4":' + '"' + data.Ain4 + '",\r\n';
+						jsn += '"Ain5":' + '"' + data.Ain5 + '",\r\n';
+						jsn += '"Ain6":' + '"' + data.Ain6 + '",\r\n';
+						jsn += '"Ain7":' + '"' + data.Ain7 + '",\r\n';
+						jsn += '"SYS_Heap":' + '"' + data.SYS_Heap + '",\r\n';
+						jsn += '"SYS_Time":' + '"' + data.SYS_Time + '"\r\n}';
+				    }
+				    else {
+				        jsn = data;
+				    }
+			        setpayload(jsn);
+				});
+			});
+
+            //Sets end of time stamp and waits 1 second before calculating laspe time
+			function setpayload(payld) {
+			    tend = Date.now();
+				setTimeout(howlong,1000);
+				$("#payloadmqqt").html(payld);
+			}
+
+            //Calculate elapsed time (Request to Response)
+			function howlong() {
+				$("#rxtime").val(tend);
+				$("#elapsetime").val(tend - tstart);
+			}
+		</script>
+	</body>
+</html>
