@@ -26,6 +26,8 @@ define SVR_TYPE SVR_HTTP_LIB
 
 6.2 To use the EspressIf SDK Web Server API, which uses event callbacks, use this define in the sketch:
 
+define SVR_TYPE SVR_HTTP_SDK
+
 6.3 The MQTT server is enabled in the following sketch line:
 
 define MQTT_SVR_ENABLE 1
