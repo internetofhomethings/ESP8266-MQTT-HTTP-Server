@@ -1,14 +1,19 @@
-<h2><strong>ESP8266 Web Server Using SDK API</strong></h2>
+<h2><strong>ESP8266 Dual MQTT and Web Server</strong></h2>
 
 This project provides a Web Server Framework using either the Arduino Wifi Library or the EspressIf SDK API.
 
-Setup:
+<strong>Setup:</strong>
 
 1. Copy the webandmqtt_server folder to your Arduino sketch folder.
 2. Copy the UtilityFunctions folder to your Arduino libraries folder.
+<<<<<<< HEAD
 3. Copy the webserver folder to your Arduino libraries folder.
 4. Install PubSubClient per http://wp.me/p5NRQ8-i5#pubsubclient
 5. Change the following in the webandmqtt_server sketch to match your network settings:
+=======
+3. Install PubSubCleint per http://wp.me/p5NRQ8-i5#pubsubclient
+4. Change the following in the webandmqtt_server sketch to match your network settings:
+>>>>>>> origin/master
 
 const char* ssid = "YourWifiSSID";
 const char* password = "YourWifiPASSWORD";
@@ -17,6 +22,7 @@ const IPAddress ipgat(192,168,0,1);
 
 define SVRPORT 9701 
 
+<<<<<<< HEAD
 6. Server Setting
 
 6.1 To use the standard Arduino Web Server library, which polls for connections, use this define in the sketch:
@@ -24,20 +30,33 @@ define SVRPORT 9701
 define SVR_TYPE SVR_HTTP_LIB
 
 6.2 To use the EspressIf SDK Web Server API, which uses event callbacks, use this define in the sketch:
+=======
+5. Server Setting
 
-#define SVR_TYPE SVR_HTTP_SDK
+5.1 To use the standard Arduino Web Server library, which polls for connections, use this define in the sketch:
 
+define SVR_TYPE SVR_HTTP_LIB
+
+5.2 To use the EspressIf SDK Web Server API, which uses event callbacks, use this define in the sketch:
+>>>>>>> origin/master
+
+define SVR_TYPE SVR_HTTP_SDK
+
+<<<<<<< HEAD
 6.3 The MQTT server is enabled in the following sketch line:
+=======
+5.3 The MQTT server is enabled in the following sketch line:
+>>>>>>> origin/master
 
 define MQTT_SVR_ENABLE 1
 
-Operation:
+<strong>Operation:</strong>
 
 While not necessary, the code assumes an LED is connected to GPIO16. This LED is ON upon 
 power-up and is turned OFF once initialization completes.
 
 
-Web Server Performance Test:
+<strong>Web Server Performance Test:</strong>
 
 Open the html file "mqtt_server.html" in a web browser to test the Web Server.
 
@@ -68,13 +87,13 @@ For the "GetSensors" request, a JSON string will be returned with the sensor val
 
 The servers will also respond to requests to turn the LED, if connected, on and off.
 
-To turn on, enter the request:
+<strong>To turn on, enter the request:</strong>
 
 /?request=LedOn
 
 And click on one of the "Request via..." buttons.
 
-To turn off, enter the request:
+<strong>To turn off, enter the request:</strong>
 
 ?request=LedOff
 
