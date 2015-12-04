@@ -25,23 +25,8 @@ define SVRPORT 9701
 define SVR_TYPE SVR_HTTP_LIB
 
 6.2 To use the EspressIf SDK Web Server API, which uses event callbacks, use this define in the sketch:
-=======
-5. Server Setting
 
-5.1 To use the standard Arduino Web Server library, which polls for connections, use this define in the sketch:
-
-define SVR_TYPE SVR_HTTP_LIB
-
-5.2 To use the EspressIf SDK Web Server API, which uses event callbacks, use this define in the sketch:
->>>>>>> origin/master
-
-define SVR_TYPE SVR_HTTP_SDK
-
-<<<<<<< HEAD
 6.3 The MQTT server is enabled in the following sketch line:
-=======
-5.3 The MQTT server is enabled in the following sketch line:
->>>>>>> origin/master
 
 define MQTT_SVR_ENABLE 1
 
