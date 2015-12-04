@@ -6,14 +6,9 @@ This project provides a Web Server Framework using either the Arduino Wifi Libra
 
 1. Copy the webandmqtt_server folder to your Arduino sketch folder.
 2. Copy the UtilityFunctions folder to your Arduino libraries folder.
-<<<<<<< HEAD
 3. Copy the webserver folder to your Arduino libraries folder.
 4. Install PubSubClient per http://wp.me/p5NRQ8-i5#pubsubclient
 5. Change the following in the webandmqtt_server sketch to match your network settings:
-=======
-3. Install PubSubCleint per http://wp.me/p5NRQ8-i5#pubsubclient
-4. Change the following in the webandmqtt_server sketch to match your network settings:
->>>>>>> origin/master
 
 const char* ssid = "YourWifiSSID";
 const char* password = "YourWifiPASSWORD";
