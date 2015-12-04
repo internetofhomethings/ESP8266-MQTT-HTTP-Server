@@ -26,6 +26,7 @@ extern "C" {                      //SDK functions for Arduino IDE access
 #include "cont.h"
 #include "espconn.h"
 #include "eagle_soc.h"
+void * pvPortZalloc(int size);
 }
 
 //Server actions
