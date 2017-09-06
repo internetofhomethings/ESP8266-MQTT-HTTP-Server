@@ -8,6 +8,8 @@
  * created Nov-30, 2015
  * by Dave St. Aubin
  *
+ * rev 1 Sep 6, 2017  Update prototype for external function pvPortZalloc
+ *
  * This example code is in the public domain.
  ********************************************************************/
 
@@ -26,7 +28,8 @@ extern "C" {                      //SDK functions for Arduino IDE access
 #include "cont.h"
 #include "espconn.h"
 #include "eagle_soc.h"
-void * pvPortZalloc(int size);
+//void * pvPortZalloc(int size);
+void * pvPortZalloc(int size,char *, int);
 }
 
 //Server actions
